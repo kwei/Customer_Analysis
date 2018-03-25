@@ -29,10 +29,9 @@ $ $ git remote add origin <你的git網址.git>
 
 執行
 $ npm run deploy
-
+```
 #### 若需要更加詳細的教學，以下連結是我的參考資料還請安心服用。
  https://github.com/gitname/react-gh-pages
-```
 
 
 ## 近期目標
