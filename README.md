@@ -19,6 +19,8 @@ $ npm install gh-pages --save-dev
 "predeploy": "npm run build",
 "deploy": "gh-pages -d build"
 ```
+這是我的 package.json
+![image](picture or gif url)
 
 ```
 然後新增git repository
