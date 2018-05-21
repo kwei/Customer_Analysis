@@ -20,7 +20,7 @@ $ npm install gh-pages --save-dev
 "deploy": "gh-pages -d build"
 ```
 這是我的 package.json
-![image](picture or gif url)
+![image](https://github.com/kwei/NodeServer/blob/master/package_json%E6%88%AA%E5%9C%96.PNG)
 
 ```
 然後新增git repository
