@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-
-import FlatButton from 'material-ui/FlatButton';
-
-import Email from 'material-ui/svg-icons/communication/email';
-import Person from 'material-ui/svg-icons/social/person';
+import PropTypes from 'prop-types';
 
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 import SubmitBtn from './component/SubmitBtn.js';
-import FloatingBtn from './component/FloatBtn.js';
 
 import './App.css';
 
@@ -22,107 +19,105 @@ import {
   getImgs
 } from './controller/functionset';
 
-const toolbar = {
-  backgroundColor: '#ffffff',
-};
+const testTimes = 20;
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      id: 0,        // the same person will have the same id number
+      id: 0,        // the same person test times
       username: "", // the user's name
       lpicType: "", // the pic's type on the left hand
       rpicType: "", // the pic's type on the right hand
-      chosen : ' ',
+      chosen : 'non',
       imgsrc1 : require('./module/img/Bedding/15.jpg'),
       randtopic1 : 'Bedding',
       imgsrc2 : require('./module/img/Children/15.jpg'),
       randtopic2 : 'Children',
-      submit : null,
-      submit_open: false,
-      left_open: false,
-      right_open: false,
-      msg : '',
+      whos: false,
+      msg: '',
+      counter: 1,
     };
   }
 
   // use fetch post methods
-  setDatabase(){
-    var id = this.state.id,
-        username = this.state.username,
-        lpicType = this.state.lpicType,
-        rpicType = this.state.rpicType,
-        chosen = this.state.chosen;
-    fetch('https://ed4844fc.ngrok.io'/*'http://localhost:3001/users'*/, {
+  setDatabase(table){
+    fetch('http://localhost:3001/users'/*'http://140.115.213.30:9487/users/database'*/, {
       method: 'post',
-      mode: 'cors',
+      //mode: 'no-cors',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        id: id,
-        username: username,
-        lpicType: lpicType,
-        rpicType: rpicType,
-        chosen: chosen
+        id: table.testId,
+        username: table.userName,
+        lpicType: table.picLeft,
+        rpicType: table.picRight,
+        chosen: table.chosen
       })
     })
-      .then((res) => console.log(res))
-      .then((req) => console.log(req))
-      .catch((error) => console.log(error));
+      .then((res) =>
+        console.log(res)
+      )
+      .catch((error) =>
+        console.log(error)
+      );
   }
 
-  btonClick = function(side){
-    this.setDatabase();
-    if(side === 'left' || side === 'right'){
-      this.setState({chosen: side});
-      var dataset = {
-        userName: 'KW',
-        testId: 0,
-        picLeft: this.state.randtopic1,
-        picRight: this.state.randtopic2,
-        chosen: side
-      }
-      var table = click_func(dataset);
-      this.setState({
-        msg: table.userName + " #" + table.testId + "  [ " + table.picLeft + " / " + table.picRight + " ] chosen: " + table.chosen,
-      });
-      var id = table.testId,
-          username = table.userName,
-          lpicType = table.picLeft,
-          rpicType = table.picRight,
-          chosen = table.chosen;
-      this.setState({
-        id: id,
-        username: username,
-        lpicType: lpicType,
-        rpicType: rpicType,
-        chosen: chosen
-      });
-      var imgset = getImgs(this.state.imgsrc1, this.state.imgsrc2);
-      this.setState({
-        imgsrc1 : imgset.imgsrc1,
-        imgsrc2 : imgset.imgsrc2,
-        randtopic1 : imgset.randtopic1,
-        randtopic2 : imgset.randtopic2,
-        chosen : side,
-      });
-    }else if(side === 'submit'){
-      this.setState({
-        submit_open: true,
-      });
+  handleAlert = function(content){
+    if(window.confirm(content)){
+      this.setState({counter: 1});
+    }else{
+      this.setState({whos: false});
+      this.setState({counter: 1});
     }
   }
 
-  handleRequestClose = () => {
+  btonClick = function(side){
+    this.setState({chosen: side});
+    var dataset = {
+      userName: this.state.username,
+      testId: 0,
+      picLeft: this.state.randtopic1,
+      picRight: this.state.randtopic2,
+      chosen: side
+    }
+    var table = click_func(dataset, testTimes);
+    this.setDatabase(table);
     this.setState({
-      submit_open: false,
-      left_open: false,
-      right_open: false,
+      msg: table.userName + " #" + table.testId + "  [ " + table.picLeft + " / " + table.picRight + " ] chosen: " + table.chosen,
     });
-  };
+    var id = table.testId,
+        username = table.userName,
+        lpicType = table.picLeft,
+        rpicType = table.picRight,
+        chosen = table.chosen;
+    this.setState({
+      id: id,
+      username: username,
+      lpicType: lpicType,
+      rpicType: rpicType,
+      chosen: chosen
+    });
+    var imgset = getImgs(this.state.imgsrc1, this.state.imgsrc2);
+    this.setState({
+      imgsrc1 : imgset.imgsrc1,
+      imgsrc2 : imgset.imgsrc2,
+      randtopic1 : imgset.randtopic1,
+      randtopic2 : imgset.randtopic2,
+      chosen : side,
+    });
+
+    var counter = this.state.counter;
+    console.log(counter);
+    if(counter === testTimes){
+      this.setState({counter: 1});
+      this.handleAlert("已連續完成20題。非常感謝您這次的參與，我們所得的資料都將用於回饋並不會做非法用途。若還想繼續做題請選擇是，感謝您。");
+    }else{
+      this.setState({counter: counter + 1});
+    }
+  }
 
   // before render
   componentWillMount(){
@@ -137,89 +132,76 @@ class App extends Component {
       });
   }
 
-  // use fetch get methods
-  getDatabase(){
-    
-  }
-
-  // after render
-  componentDidMount(){
-    /*fetch(`/users/`)
-      //.then(res => console.log(res.headers.get('content-type')))
-      .then((res) => res.json())
-      .catch((error) => console.log(error))
-      //.then((users) => console.log(users))
-      .then((users) => this.setState({ users: [{id: users.id, username: users.username}] }))
-      .catch((error) => console.log(error));
-      //.then(() => console.log(this.state.users));*/
-  }
-
-  // render my database info to the page
-  renderDatabase(){
-    return this.state.users.map(users => {
-      return (
-        <li key={users.id}>{users.username}</li>
-      );
-    })
-  }
-
   // render function
   render() {
     return (
       <div className="App">
 
         <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
-          <Toolbar style={toolbar}>
-            <ToolbarGroup firstChild={true}>
-              <FlatButton
-                target="_blank"
-                hoverColor="#f0f0f0"
-                label="About me"
-                primary={true}
-                icon={<Person />}/>
-            </ToolbarGroup>
-            <ToolbarGroup>
-              <ToolbarSeparator />
-              <FlatButton
-                target="_blank"
-                hoverColor="#f0f0f0"
-                label="Mail me"
-                primary={true}
-                icon={<Email />}/>
-            </ToolbarGroup>
-            </Toolbar>
+          <Paper elevation={4}>
+            <Typography variant="headline" component="h3">
+              <br/><h2>顧客興趣分析 - Welcome to Customer Analysis System</h2>
+            </Typography>
+            <Typography component="p">
+              我們將為您製作出一張專屬的興趣表，<br/>
+              唯一需要做的事情就是選擇你較喜歡的照片。<br/>
+              <br/>
+            </Typography>
+          </Paper>
         </MuiThemeProvider>
 
-        <header className="App-header">
-          <h1 className="App-title">Welcome to Customer Analysis System</h1>
-          <h4 className="App-subtitle">
-            This system will make your own intrests table.<br/>
-            The only thing you need to do is to choose the picture which you like.
-          </h4>
-        </header>
-
-        <div className="imgbox">
-          <div className="left-img">
-            <img className="img1" src={this.state.imgsrc1} alt="left_img" />
-            <SubmitBtn btnonClick={() => this.btonClick('left')} isopen={true} message={this.state.msg} />
+        {this.state.whos ?
+          <div className="imgbox">
+            <div className="left-img">
+              <img className="img1" src={this.state.imgsrc1} alt="left_img" />
+              <SubmitBtn label="like" btnonClick={() => this.btonClick('left')} isopen={true} message={this.state.msg} />
+            </div>
+            <div className="right-img">
+              <img className="img2" src={this.state.imgsrc2} alt="right_img" />
+              <SubmitBtn label="like" btnonClick={() => this.btonClick('right')} isopen={true} message={this.state.msg} />
+            </div>
+          </div> :
+          <div>
+            <br/><br/><h3><br/></h3><br/>
+            <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+              <form noValidate autoComplete="off">
+                <TextField
+                  id="name"
+                  label="Your name"
+                  value={this.state.name}
+                  onChange={(data) => this.setState({username: data.target.value})}
+                  margin="normal"/>
+              </form>
+            </MuiThemeProvider>
+            <br/><br/>
+            <div>
+              <SubmitBtn label="start" btnonClick={() => this.setState({whos: true})} />
+            </div>
+            <h3><br/></h3>
           </div>
-          <div className="right-img">
-            <img className="img2" src={this.state.imgsrc2} alt="right_img" />
-            <SubmitBtn btnonClick={() => this.btonClick('right')} isopen={true} message={this.state.msg} />
-          </div>
-        </div>
+        }
 
-        <div className="footer">
-          <h3 className="footer-title">Thanks for useing the Customer Analysis System</h3>
-          <h5 className="footer-subtitle">
-            &copy; 2018 KW<br/><br/>
-            We are useing ReactJs and it is awesome!<br/>
-            Follow my <a className="link_github" href="https://github.com/">github</a> to get more info.
-          </h5>
-        </div>
+        <br/><br/><br/><br/><br/><br/>
+        <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+          <Paper elevation={1}>
+            <Typography component="h3">
+              <br/><h4>Thanks for using the Customer Analysis System.</h4>
+            </Typography>
+            <Typography component="p">
+              &copy; 2018 KW<br/><br/>
+              We are useing ReactJs and it is awesome!<br/>
+              Follow my <a className="link_github" href="https://github.com/">github</a> to get more info.<br/>
+              <br/>
+            </Typography>
+          </Paper>
+        </MuiThemeProvider>
       </div>
     );
   }
 }
+
+App.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
 export default App;
