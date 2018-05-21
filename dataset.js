@@ -17,7 +17,7 @@ class inter_dataset{
 			picRight: data.picRight,
 			chosen: data.chosen
 		}
-        this.userName = obj.userName;
+    this.userName = obj.userName;
 		this.testId = obj.testId;
 		this.picLeft = obj.picLeft;
 		this.picRight = obj.picRight;
@@ -43,7 +43,7 @@ class inter_dataset{
 			chosen: this.chosen
 		}
 		//console.log(table.userName + " " + table.testId + " " + table.picLeft + " " + table.picRight + " " + table.chosen);
-		return table; 
+		return table;
 	}
 }
 export {inter_dataset}
