@@ -20,8 +20,33 @@ $ npm install gh-pages --save-dev
 "deploy": "gh-pages -d build"
 ```
 這是我的 package.json
-
-![image](https://github.com/kwei/NodeServer/blob/master/package_json%E6%88%AA%E5%9C%96.PNG)
+```
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^1.0.0",
+    "material-ui": "^0.20.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-scripts": "1.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "gh-pages": "^1.1.0"
+  },
+  "homepage": "http://kwei.github.io/NodeServer"
+}
+```
 
 ```
 然後新增git repository
