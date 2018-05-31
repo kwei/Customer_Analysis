@@ -10,6 +10,15 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
 import SubmitBtn from './component/SubmitBtn.js';
+import {
+  setData_to_Firebase,
+  Permission_FCM,
+  SingIn,
+  SingOut,
+  setNotification,
+} from './controller/firebase';
+
+import * as firebase from 'firebase';
 
 import './App.css';
 
@@ -20,6 +29,15 @@ import {
 } from './controller/functionset';
 
 const testTimes = 20;
+
+const config = {
+  apiKey: "AIzaSyBFGSrGGRCsiiwH6-rZwwbdjrBXpiv21TY",
+  authDomain: "website-375f1.firebaseapp.com",
+  databaseURL: "https://website-375f1.firebaseio.com",
+  projectId: "website-375f1",
+  storageBucket: "website-375f1.appspot.com",
+  messagingSenderId: "862137080452"
+};
 
 class App extends Component {
   constructor(props){
@@ -37,11 +55,20 @@ class App extends Component {
       whos: false,
       msg: '',
       counter: 1,
+      now: ''
     };
+    firebase.initializeApp(config);
   }
 
   // use fetch post methods
   setDatabase(table){
+
+    var now = this.state.now;
+
+    var state = setData_to_Firebase(firebase, table, now);
+
+    console.log(state);
+
     fetch('http://localhost:3001/users'/*'http://140.115.213.30:9487/users/database'*/, {
       method: 'post',
       //mode: 'no-cors',
@@ -65,12 +92,18 @@ class App extends Component {
       );
   }
 
+
   handleAlert = function(content){
+    var nowTime = new Date().toLocaleString();
     if(window.confirm(content)){
       this.setState({counter: 1});
+      this.setState({now: nowTime});
+      SingOut(firebase);
+      SingIn(firebase);
     }else{
       this.setState({whos: false});
       this.setState({counter: 1});
+      this.setState({now: nowTime});
     }
   }
 
@@ -130,6 +163,16 @@ class App extends Component {
         randtopic1 : imgset.randtopic1,
         randtopic2 : imgset.randtopic2,
       });
+    var nowTime = new Date().toLocaleString();
+    this.setState({now: nowTime});
+  }
+
+  componentDidMount(){
+    SingOut(firebase);
+    Permission_FCM(firebase);
+    setTimeout(() => {
+      setNotification(firebase);
+    }, 6000);
   }
 
   // render function
@@ -175,7 +218,9 @@ class App extends Component {
             </MuiThemeProvider>
             <br/><br/>
             <div>
-              <SubmitBtn label="start" btnonClick={() => this.setState({whos: true})} />
+              <SubmitBtn label="start" btnonClick={function(){
+                this.setState({whos: true});
+                SingIn(firebase) }.bind(this)}/>
             </div>
             <h3><br/></h3>
           </div>
