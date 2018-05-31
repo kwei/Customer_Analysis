@@ -18,9 +18,9 @@
 
 ## 簡介
 ```
-這是 demo 版本，並不會有任何資料交換於伺服器，單純是方便檢測 UI 介面。所使用的是 gh-pages 套件將 react js 的 app 也能透過 github page 發佈到網路上。而程式碼也是提供參考並不是所有檔案都有包含。 :smile:
-[demo 網址] (https://kwei.github.io/NodeServer/)
-```
+這是 demo 版本，並不會有任何資料交換於伺服器，單純是方便檢測 UI 介面。所使用的是 gh-pages 套件將 react js 的 app 也能透過 github page 發佈到網路上。而程式碼也是提供參考並不是所有檔案都有包含。
+``` :smile: [demo 網址] (https://kwei.github.io/NodeServer/)
+
 
 ## 如何使用 gh-pages deploy web to github
 ```Bash
@@ -102,7 +102,7 @@ $ npm run deploy
 
 #### [Emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)
 
-[回到顶部](#top)
+<b><a href="#----">回到頂部</a></b>
 
 License
 -------
