@@ -20,7 +20,7 @@
 ```
 這是 demo 版本，並不會有任何資料交換於伺服器，單純是方便檢測 UI 介面。所使用的是 gh-pages 套件將 react js 的 app 也能透過 github page 發佈到網路上。而程式碼也是提供參考並不是所有檔案都有包含。
 ``` 
-:smile: [demo 網址] (https://kwei.github.io/NodeServer/)
+:smile: [demo 網址](https://kwei.github.io/NodeServer/)
 
 
 ## 如何使用 gh-pages deploy web to github
@@ -78,7 +78,7 @@ $ $ git remote add origin <你的git網址.git>
 執行
 $ npm run deploy
 ```
-===
+____
 
 #### 若需要更加詳細的[教學](https://github.com/gitname/react-gh-pages)，以下連結是我的參考資料還請安心服用。
 
