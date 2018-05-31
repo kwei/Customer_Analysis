@@ -86,7 +86,7 @@ $ npm run deploy
 ```
 ____
 
-#### 若需要更加詳細的[教學](https://github.com/gitname/react-gh-pages)，以下連結是我的參考資料還請安心服用。
+#### 若需要更加詳細的[教學](https://github.com/gitname/react-gh-pages)，連結是我的參考資料還請安心服用。
 
 
 ## 近期目標
