@@ -22,7 +22,7 @@
 所使用的是 gh-pages 套件將 react js 的 app 也能透過 github page 發佈到網路上。
 而程式碼也是提供參考並不是所有檔案都有包含。
 ``` 
-:smile: Demo 網址 : https://kwei.github.io/NodeServer/
+:smile: [Demo 網址](https://kwei.github.io/NodeServer/)
 
 
 ## 如何使用 gh-pages deploy web to github
