@@ -18,27 +18,31 @@
 
 ## 簡介
 ```
-這是 demo 版本，並不會有任何資料交換於伺服器，單純是方便檢測 UI 介面。所使用的是 gh-pages 套件將 react js 的 app 也能透過 github page 發佈到網路上。而程式碼也是提供參考並不是所有檔案都有包含。
+這是 demo 版本，並不會有任何資料交換於伺服器，單純是方便檢測 UI 介面。
+所使用的是 gh-pages 套件將 react js 的 app 也能透過 github page 發佈到網路上。
+而程式碼也是提供參考並不是所有檔案都有包含。
 ``` 
 :smile: [demo 網址](https://kwei.github.io/NodeServer/)
 
 
 ## 如何使用 gh-pages deploy web to github
-```Bash
+
 安裝gh-pages套件至dev
+```Bash
 $ npm install gh-pages --save-dev
 ```
 
-```JSON
 在package.json檔加入以下代碼
+```JSON
 "homepage": "http://yourgitname.github.io/yourgitproject"
 ```
 
-```JSON
 並在script中加入以下代碼
+```JSON
 "predeploy": "npm run build",
 "deploy": "gh-pages -d build"
 ```
+
 這是我的 package.json :flushed:
 ```JSON
 {
@@ -68,14 +72,16 @@ $ npm install gh-pages --save-dev
 }
 ```
 
-```Bash
 然後新增git repository
+```Bash
 $ git init
-
+```
 加入你的git
+```Bash
 $ $ git remote add origin <你的git網址.git>
-
+```
 執行
+```Bash
 $ npm run deploy
 ```
 ____
