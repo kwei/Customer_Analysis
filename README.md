@@ -5,6 +5,8 @@
 ### 這是demo版本，並不會有任何資料交換於伺服器，單純是方便檢測UI介面。所使用的是gh-pages套件將react js的app也能透過github page發佈到網路上。而程式碼也是提供參考並不是所有檔案都有包含。
 網址 : https://kwei.github.io/NodeServer/
 
+![image](picture or gif url)
+
 ```
 安裝gh-pages套件至dev
 $ npm install gh-pages --save-dev
@@ -70,3 +72,7 @@ $ npm run deploy
 ## 版本
 
 ### 這是demo第二版，日後也將會進行優化並推出新版本。
+
+## 實際操作影片
+ https://drive.google.com/drive/folders/1kSFhl8Pp8g9oYFsHXrEk4QhbkXAbUxKY
+
