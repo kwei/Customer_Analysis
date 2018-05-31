@@ -22,8 +22,6 @@
 所使用的是 gh-pages 套件將 react js 的 app 也能透過 github page 發佈到網路上。
 而程式碼也是提供參考並不是所有檔案都有包含。
 ``` 
-:smile: [Demo 網址](https://kwei.github.io/NodeServer/)
-
 
 ## 如何使用 gh-pages deploy web to github
 
@@ -105,7 +103,7 @@ ____
 |      2.0      | 重新配置 UI (Metrial Design) 並加入 Firebase ，登入帳號 by google 、推播和資料庫。|
 
 ## 實際操作影片 :eyes:
- [![連結](https://github.com/kwei/NodeServer/blob/master/DEMO%E6%88%AA%E5%9C%96.PNG)](https://drive.google.com/drive/folders/1kSFhl8Pp8g9oYFsHXrEk4QhbkXAbUxKY)
+ [![連結](https://github.com/kwei/NodeServer/blob/master/DEMO%E6%88%AA%E5%9C%96.PNG)](https://drive.google.com/file/d/1eOvo3NrbBnWIdDBgczM6s_dMH8sTOO_o/view)
 
 #### [Emoji](https://www.webpagefx.com/tools/emoji-cheat-sheet/)
 
